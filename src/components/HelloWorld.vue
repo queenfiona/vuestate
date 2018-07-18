@@ -1,56 +1,73 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank">babel</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+   <div class="left"> 
+     <h1>{{ title }}</h1> 
+     <ul v-for="(link,index) in links" v-bind:key="index">
+       <li>{{link}}</li>
+     </ul>
+   </div>
+   <div class="right">
+     <stats/>
+   </div>
   </div>
 </template>
 
 <script>
+import Stats from '@/components/Stats.vue'
+import { mapState } from 'vuex'
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  components: {
+    Stats
+  },
+  computed: {
+    ...mapState([
+      'title',
+      'links'
+
+    ]),
   }
+ 
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+html, #app, .home {
+    height: 100%;
+  }
+  body {
+    background-color: #F4F4F4;
+    margin: 0;
+    height: 100%;
+  }
+
+  .hello {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 100%;
+    grid-template-areas:
+      "left right";
+    height: 100%;
+  }
+
+  .left, .right {
+    padding: 30px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  ul li {
+    padding: 20px;
+    background: white;
+    margin-bottom: 8px;
+  }
+
+  .right {
+    grid-area: right;
+    background-color: #E9E9E9;
+  }
 </style>
