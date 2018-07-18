@@ -7,7 +7,7 @@
      </form>
      <ul v-for="(link,index) in links" v-bind:key="index">
        <li>{{link}}</li>
-       <button v-on:click="removeLinks(index)" class="rm">Remove</button>
+       <button v-on:click="removeLinks(index)" class="rm">Remove</button>      
      </ul>
    </div>
    <div class="right">
